@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Last Mile: 10 Research-Backed Exam Strategies</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1B3A5C;
+    --paper: #faf8f3;
+    --accent: #C84B31;
+    --gold: #D4A017;
+    --teal: #1e7f74;
+    --slate: #4a5568;
+    --rule: #d4cfc4;
+    --card-bg: #ffffff;
+    --tag-bg: #f0ede6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 2.5rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.12;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.08;
+  }
+
+  .header-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    max-width: 680px;
+    position: relative;
+    z-index: 1;
+  }
+
+  header h1 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .header-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 600px;
+    opacity: 0.85;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.9rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .filter-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-right: 0.25rem;
+  }
+
+  .filter-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.35rem 0.85rem;
+    border: 1.5px solid var(--rule);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--slate);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .filter-btn.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+  /* ── GRID ── */
+  main {
+    padding: 2rem 2.5rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.25rem;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card:hover {
+    box-shadow: 0 6px 24px rgba(27,58,92,0.12);
+    transform: translateY(-2px);
+  }
+
+  .card.hidden { display: none; }
+
+  .card-accent-bar {
+    height: 4px;
+    width: 100%;
+  }
+
+  .card-header {
+    padding: 1.25rem 1.25rem 0.75rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .card-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--rule);
+    flex-shrink: 0;
+    width: 2.5rem;
+  }
+
+  .card-title-group { flex: 1; }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.45rem;
+    border-radius: 2px;
+  }
+
+  .tag.instruction { background: #dbeafe; color: #1e40af; }
+  .tag.metacog     { background: #ede9fe; color: #5b21b6; }
+  .tag.anxiety     { background: #dcfce7; color: #15803d; }
+  .tag.quick       { background: #fef3c7; color: #92400e; }
+  .tag.mindset     { background: #fce7f3; color: #9d174d; }
+
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+
+  .card-body {
+    padding: 0 1.25rem 1rem;
+  }
+
+  .card-description {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--slate);
+  }
+
+  /* ── EXPAND ── */
+  .card-expand {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .card.expanded .card-expand { max-height: 600px; }
+
+  .expand-inner {
+    border-top: 1px solid var(--rule);
+    margin: 0 1.25rem;
+    padding: 1rem 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .expand-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .expand-content {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--slate);
+  }
+
+  .example-box {
+    background: var(--paper);
+    border-left: 3px solid var(--gold);
+    padding: 0.6rem 0.8rem;
+    font-size: 0.83rem;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--ink);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .source-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    color: #999;
+    letter-spacing: 0.05em;
+  }
+
+  .expand-caret {
+    position: absolute;
+    bottom: 0.7rem;
+    right: 1rem;
+    font-size: 0.7rem;
+    color: var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    transition: transform 0.25s ease;
+  }
+
+  .card.expanded .expand-caret { transform: rotate(180deg); }
+
+  /* ── COACHING NOTE ── */
+  .coaching-note {
+    margin-top: 2rem;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 3px;
+    padding: 1.75rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .coaching-note::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.08;
+  }
+
+  .coaching-note-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .coaching-note h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .coaching-note p {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    opacity: 0.85;
+    max-width: 740px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 1.25rem 2.5rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #aaa;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    header, .filter-bar, main { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .grid { grid-template-columns: 1fr; }
+    .coaching-note { padding: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Instructional Coaching Reference · AP &amp; Final Exams</div>
+  <h1>The <em>Last Mile</em>: 10 Research-Backed Strategies for Exam Season</h1>
+  <p class="header-sub">Evidence-based moves coaches can share with teachers in the final 3–4 weeks before AP and final exams. Covers classroom instruction, metacognition, and anxiety reduction.</p>
+  <div class="header-badges">
+    <span class="badge">Click any card to expand</span>
+    <span class="badge">Filter by category</span>
+    <span class="badge">Peer-reviewed sources included</span>
+  </div>
+</header>
+
+<div class="filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" data-filter="all">All 10</button>
+  <button class="filter-btn" data-filter="instruction">📚 Instruction</button>
+  <button class="filter-btn" data-filter="metacog">🧠 Metacognition</button>
+  <button class="filter-btn" data-filter="anxiety">💚 Anxiety</button>
+  <button class="filter-btn" data-filter="mindset">✨ Mindset</button>
+  <button class="filter-btn" data-filter="quick">⚡ Quick Win</button>
+</div>
+
+<main>
+  <div class="grid" id="cardGrid">
+
+    <!-- CARD 1 -->
+    <div class="card" data-tags="instruction quick" onclick="toggleCard(this)">
+      <div class="card-accent-bar" style="background: var(--accent);"></div>
+      <div class="card-header">
+        <div class="card-number">01</div>
+        <div class="card-title-group">
+          <div class="card-tags">
+            <span class="tag instruction">Instruction</span>
+            <span class="tag quick">Quick Win</span>
+          </div>
+          <div class="card-title">Quiz Students Daily — Even Briefly</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-description">Low-stakes daily retrieval beats marathon review. Students who actively retrieve information regularly forget dramatically less than those who reread.</p>
+        <div class="card-expand">
+          <div class="expand-inner">
+            <div>
+              <div class="expand-section-label">What the research says</div>
+              <p class="expand-content">Roediger &amp; Karpicke (2006) found students who retrieved information forgot only 13% vs. 56% for those who restudied. A classroom meta-analysis found effect sizes of g = 0.61 for retrieval practice vs. all other strategies. Students who quiz regularly also report feeling less nervous about high-stakes tests.</p>
+            </div>
+            <div>
+              <div class="expand-section-label">Coaching move for teachers</div>
+              <div class="example-box">Open every class with a 5-minute "brain dump" — students write everything they recall about yesterday's topic on a blank page, then check their notes. No grade. Just retrieval.</div>
+            </div>
+            <div class="source-line">📚 Roediger &amp; Karpicke, 2006 · Adesope et al., 2017 · Dunlosky et al., 2013</div>
+          </div>
+        </div>
+      </div>
+      <div class="expand-caret">▼</div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card" data-tags="instruction" onclick="toggleCard(this)">
+      <div class="card-accent-bar" style="background: var(--gold);"></div>
+      <div class="card-header">
+        <div class="card-number">02</div>
+        <div class="card-title-group">
+          <div class="card-tags">
+            <span class="tag instruction">Instruction</span>
+          </div>
+          <div class="card-title">Space Review Across All Three Weeks</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-description">Short, frequent review sessions distributed over time outperform a single long cram session — by a wide margin.</p>
+        <div class="card-expand">
+          <div class="expand-inner">
+            <div>
+              <div class="expand-section-label">What the research says</div>
+              <p class="expand-content">Cepeda et al.'s meta-analysis of 839 assessments from 317 experiments established that spacing content 2–4 days apart is optimal when exams are 3 weeks away. Hattie places spaced vs. massed practice at d = 0.65–0.71 — well above the threshold for meaningful impact.</p>
+            </div>
+            <div>
+              <div class="expand-section-label">Coaching move for teachers</div>
+              <div class="example-box">Build a 3-week spiral calendar. Week 1: Units 1–4. Week 2: Units 5–8 + spiral back. Week 3: Full cumulative mixed review. Every homework includes 30–50% prior-unit problems.</div>
+            </div>
+            <div class="source-line">📚 Cepeda et al., 2006 &amp; 2008 · Hattie Visible Learning</div>
+          </div>
+        </div>
+      </div>
+      <div class="expand-caret">▼</div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card" data-tags="instruction" onclick="toggleCard(this)">
+      <div class="card-accent-bar" style="background: var(--teal);"></div>
+      <div class="card-header">
+        <div class="card-number">03</div>
+        <div class="card-title-group">
+          <div class="card-tags">
+            <span class="tag instruction">Instruction</span>
+          </div>
+          <div class="card-title">Mix Topics — Don't Review Chapter by Chapter</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-description">Interleaving different problem types or topics within a single session produces dramatically better long-term retention than blocked practice.</p>
+        <div class="card-expand">
+          <div class="expand-inner">
+            <div>
+              <div class="expand-section-label">What the research says</div>
+              <p class="expand-content">Rohrer, Dedrick &amp; Stershic (2015) found students receiving interleaved practice scored 72% on delayed tests vs. 38% for blocked practice (d = 1.05). Students hate it during practice — but it works because it forces them to identify which strategy to use, not just execute one they already know is coming.</p>
+            </div>
+            <div>
+              <div class="expand-section-label">Coaching move for teachers</div>
+              <div class="example-box">Replace chapter-by-chapter review packets with mixed-topic problem sets. Warn students in advance: "This will feel harder. That's the point — and the research."</div>
+            </div>
+            <div class="source-line">📚 Rohrer, Dedrick &amp; Stershic, 2015 · Taylor &amp; Rohrer, 2010</div>
+          </div>
+        </div>
+      </div>
+      <div class="expand-caret">▼</div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="card" data-tags="instruction quick" onclick="toggleCard(this)">
+      <div class="card-accent-bar" style="background: #6366f1;"></div>
+      <div class="card-header">
+        <div class="card-number">04</div>
+        <div class="card-title-group">
+          <div class="card-tags">
+            <span class="tag instruction">Instruction</span>
+            <span class="tag quick">Quick Win</span>
+          </div>
+          <div class="card-title">Use Data to Target Actual Gaps</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-description">Don't review everything equally. Short diagnostics reveal where students actually are — and where review time will make the most difference.</p>
+        <div class="card-expand">
+          <div class="expand-inner">
+            <div>
+              <div class="expand-section-label">What the research says</div>
+              <p class="expand-content">Black &amp; Wiliam's synthesis of 580+ articles found formative assessment produces effect sizes of 0.40–0.70. Hattie rates feedback at d = 0.70. Key: feedback focused on task (not grades) and forward-looking ("What's next?") outperforms all other feedback types.</p>
+            </div>
+            <div>
+              <div class="expand-section-label">Coaching move for teachers</div>
+              <div class="example-box">Run a 5-question diagnostic per major topic. Have students traffic-light each topic (red/yellow/green). Reteach only the reds — not everything. Use comment-only feedback on practice tests.</div>
+            </div>
+            <div class="source-line">📚 Black &amp; Wiliam, 1998 · Hattie, Visible Learning</div>
+          </div>
+        </div>
+      </div>
+      <div class="expand-caret">▼</div>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="card" data-tags="instruction" onclick="toggleCard(this)">
+      <div class="card-accent-bar" style="background: #f59e0b;"></div>
+      <div class="card-header">
+        <div class="card-number">05</div>
+        <div class="card-title-group">
+          <div class="card-tags">
+            <span class="tag instruction">Instruction</span>
+          </div>
+          <div class="card-title">Model the Hardest Problems First</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-description">For the toughest exam content, show a fully worked example before students practice. Adding "why this step?" prompts doubles the learning benefit.</p>
+        <div class="card-expand">
+          <div class="expand-inner">
+            <div>
+              <div class="expand-section-label">What the research says</div>
+              <p class="expand-content">Sweller's Cognitive Load Theory (1985–) shows worked examples reduce extraneous cognitive load, freeing working memory for actual learning. A 2023 meta-analysis (g = 0.48) confirmed the effect across 43 studies. Critical nuance: this helps novices, but can hinder students who've already mastered the content.</p>
+            </div>
+            <div>
+              <div class="expand-section-label">Coaching move for teachers</div>
+              <div class="example-box">For "red zone" topics, use example-then-practice pairs. Show a fully solved problem, add "Why was this step taken?" after each line, then have students solve a parallel problem independently.</div>
+            </div>
+            <div class="source-line">📚 Sweller &amp; Cooper, 1985 · Barbieri et al., 2023 · Chi et al.</div>
+          </div>
+        </div>
+      </div>
+      <div class="expand-caret">▼</div>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="card" data-tags="metacog quick" onclick="toggleCard(this)">
+      <div class="card-accent-bar" style="background: #8b5cf6;"></div>
+      <div class="card-header">
+        <div class="card-number">06</div>
+        <div class="card-title-group">
+          <div class="card-tags">
+            <span class="tag metacog">Metacognition</span>
+            <span class="tag quick">Quick Win</span>
+          </div>
+          <div class="card-title">Teach Students to Test Themselves</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-description">Rereading creates a false sense of mastery. Closing the notes and recalling beats rereading every time — and teachers need to say this out loud.</p>
+        <div class="card-expand">
+          <div class="expand-inner">
+            <div>
+              <div class="expand-section-label">What the research says</div>
+              <p class="expand-content">Dunlosky et al. (2013) rated highlighting and rereading "low utility" — the two most common student strategies. Bjork's research shows students confuse fluency (recognizing information on the page) with learning (being able to recall it independently). The illusion of fluency is the enemy.</p>
+            </div>
+            <div>
+              <div class="expand-section-label">Coaching move for teachers</div>
+              <div class="example-box">Run a classroom demo: half the class rereads a passage 4 times; half reads once and recalls 3 times. Quiz two days later and discuss. Then say: "That feeling of 'I've got this' when rereading? That's not learning. That's recognition."</div>
+            </div>
+            <div class="source-line">📚 Dunlosky et al., 2013 · Bjork, Dunlosky &amp; Kornell, 2013</div>
+          </div>
+        </div>
+      </div>
+      <div class="expand-caret">▼</div>
+    </div>
+
+    <!-- CARD 7 -->
+    <div class="card" data-tags="metacog" onclick="toggleCard(this)">
+      <div class="card-accent-bar" style="background: #06b6d4;"></div>
+      <div class="card-header">
+        <div class="card-number">07</div>
+        <div class="card-title-group">
+          <div class="card-tags">
+            <span class="tag metacog">Metacognition</span>
+          </div>
+          <div class="card-title">Build Calibration With Prediction Checks</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-description">Students who can't accurately judge what they know will study the wrong things. Prediction-then-comparison is the most powerful calibration exercise available.</p>
+        <div class="card-expand">
+          <div class="expand-inner">
+            <div>
+              <div class="expand-section-label">What the research says</div>
+              <p class="expand-content">Kruger &amp; Dunning (1999) showed students in the bottom quartile consistently overestimate their performance. Delayed judgments of learning — predictions made after a gap — are significantly more accurate (Thiede et al., 2005). Overconfident students study less and use less effective strategies.</p>
+            </div>
+            <div>
+              <div class="expand-section-label">Coaching move for teachers</div>
+              <div class="example-box">Before every practice quiz: students write "I predict I'll score ___/10" and list their most and least confident topics. After: compare to actual score. Repeat weekly — calibration improves measurably over 3–4 sessions.</div>
+            </div>
+            <div class="source-line">📚 Kruger &amp; Dunning, 1999 · Thiede et al., 2005 · Zimmerman SRL framework</div>
+          </div>
+        </div>
+      </div>
+      <div class="expand-caret">▼</div>
+    </div>
+
+    <!-- CARD 8 -->
+    <div class="card" data-tags="anxiety quick" onclick="toggleCard(this)">
+      <div class="card-accent-bar" style="background: var(--teal);"></div>
+      <div class="card-header">
+        <div class="card-number">08</div>
+        <div class="card-title-group">
+          <div class="card-tags">
+            <span class="tag anxiety">Anxiety</span>
+            <span class="tag quick">Quick Win</span>
+          </div>
+          <div class="card-title">Let Students Write Out Their Worries</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-description">Ten minutes of expressive writing immediately before a high-stakes exam frees working memory — the same resource anxiety hijacks during test-taking.</p>
+        <div class="card-expand">
+          <div class="expand-inner">
+            <div>
+              <div class="expand-section-label">What the research says</div>
+              <p class="expand-content">Ramirez &amp; Beilock's 2011 study in Science found that high-anxiety 9th graders who wrote expressively before a biology final scored a full letter grade higher than controls (d = 0.57). The writing eliminated the negative correlation between anxiety and performance (r dropped from −0.51 to non-significant).</p>
+            </div>
+            <div>
+              <div class="expand-section-label">Coaching move for teachers</div>
+              <div class="example-box">On exam day, give students 10 minutes with this prompt: "Write openly about your thoughts and feelings regarding the exam you're about to take." Papers go in an envelope — private. Practice it first during a low-stakes quiz.</div>
+            </div>
+            <div class="source-line">📚 Ramirez &amp; Beilock, 2011 — Science · Rozek et al., 2019</div>
+          </div>
+        </div>
+      </div>
+      <div class="expand-caret">▼</div>
+    </div>
+
+    <!-- CARD 9 -->
+    <div class="card" data-tags="anxiety mindset" onclick="toggleCard(this)">
+      <div class="card-accent-bar" style="background: #ec4899;"></div>
+      <div class="card-header">
+        <div class="card-number">09</div>
+        <div class="card-title-group">
+          <div class="card-tags">
+            <span class="tag anxiety">Anxiety</span>
+            <span class="tag mindset">Mindset</span>
+          </div>
+          <div class="card-title">Reframe Nerves as Readiness</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-description">How students interpret their physiological anxiety — racing heart, butterflies — determines whether it helps or hurts. Reappraisal is a teachable, evidence-based skill.</p>
+        <div class="card-expand">
+          <div class="expand-inner">
+            <div>
+              <div class="expand-section-label">What the research says</div>
+              <p class="expand-content">Jamieson et al. (2010, 2016) found that telling students arousal improves performance changed their cardiovascular responses from threat to challenge patterns — and improved exam scores. Alia Crum's "stress mindset" research found a brief 3-minute reframe shifted cortisol responses and increased desire for feedback.</p>
+            </div>
+            <div>
+              <div class="expand-section-label">Coaching move for teachers</div>
+              <div class="example-box">Post this anchor chart: "Your racing heart = your brain getting oxygen to perform." Teach a 3-step script: Acknowledge the stress → Welcome it as caring → Channel it as energy. Practice 2–3 weeks before exams, not just the day of.</div>
+            </div>
+            <div class="source-line">📚 Jamieson et al., 2010 &amp; 2016 · Crum, 2013 — J. of Personality &amp; Social Psych.</div>
+          </div>
+        </div>
+      </div>
+      <div class="expand-caret">▼</div>
+    </div>
+
+    <!-- CARD 10 -->
+    <div class="card" data-tags="mindset anxiety" onclick="toggleCard(this)">
+      <div class="card-accent-bar" style="background: var(--gold);"></div>
+      <div class="card-header">
+        <div class="card-number">10</div>
+        <div class="card-title-group">
+          <div class="card-tags">
+            <span class="tag mindset">Mindset</span>
+            <span class="tag anxiety">Anxiety</span>
+          </div>
+          <div class="card-title">Normalize Struggle — Name the Growth</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-description">Brief growth mindset and belonging interventions reduce the achievement gap. Framing exams as learning — not judgment — removes identity threat for the most vulnerable students.</p>
+        <div class="card-expand">
+          <div class="expand-inner">
+            <div>
+              <div class="expand-section-label">What the research says</div>
+              <p class="expand-content">Yeager et al. (2019, Nature) found a sub-one-hour growth mindset intervention improved grades for lower-achieving students across 12,490 ninth-graders nationally. Walton &amp; Cohen's (2011) belonging intervention halved the racial achievement gap over three years. Cohen et al.'s values affirmation reduced the gap by 40% with just 15 minutes of writing.</p>
+            </div>
+            <div>
+              <div class="expand-section-label">Coaching move for teachers</div>
+              <div class="example-box">Run a 15-minute values affirmation before exams: "Choose your most important value and write about why it matters to you." Say aloud: "Almost everyone taking this exam has felt overwhelmed. That's completely normal — and it doesn't predict your score."</div>
+            </div>
+            <div class="source-line">📚 Yeager et al., 2019 — Nature · Walton &amp; Cohen, 2011 — Science · Cohen et al., 2006</div>
+          </div>
+        </div>
+      </div>
+      <div class="expand-caret">▼</div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- COACHING NOTE -->
+  <div class="coaching-note">
+    <div class="coaching-note-label">A note for coaches</div>
+    <h3>These strategies compound — and they don't require separate time.</h3>
+    <p>A 5-minute brain dump that opens each class simultaneously provides retrieval practice (instruction), builds calibration (metacognition), and reduces test anxiety — students in Agarwal's research reported feeling less nervous when quizzing was routine. The most effective final three weeks combine all three domains: daily retrieval with spaced, interleaved content; explicit self-testing and calibration routines; and brief reappraisal, expressive writing, and belonging exercises woven into the classroom. The cognitive science here is among the strongest in all of educational psychology. Share it with confidence.</p>
+  </div>
+
+</main>
+
+<footer>
+  Sources: Roediger &amp; Karpicke (2006) · Dunlosky et al. (2013) · Black &amp; Wiliam (1998) · Hattie Visible Learning · Ramirez &amp; Beilock (2011) · Jamieson et al. (2016) · Yeager et al. (2019) · Walton &amp; Cohen (2011) · Cepeda et al. (2006) · Rohrer et al. (2015)
+</footer>
+
+<script>
+  function toggleCard(card) {
+    card.classList.toggle('expanded');
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const filter = this.dataset.filter;
+      document.querySelectorAll('.card').forEach(card => {
+        if (filter === 'all') {
+          card.classList.remove('hidden');
+        } else {
+          const tags = card.dataset.tags || '';
+          card.classList.toggle('hidden', !tags.includes(filter));
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
